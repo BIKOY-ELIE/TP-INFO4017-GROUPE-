@@ -1,14 +1,30 @@
 #include <iostream>
-#include "karatsuba/karatsuba.hpp"
+#include "karatsuba/karatsuba.h"
 
 using namespace std;
+using namespace kara;
 
-int main(){
+int main()
+{
 
-    long a = 50;
-    long b = 37;
+    long a;
+    long b;
+
+    cout << "Entrer un premier nombre : ";
+    cin >> a;
+    cout << "Entrer un second nombre : ";
+    cin >> b;
     long c = karatsuba(a, b);
-    cout << c;
+    cout << endl;
+    if (c == -1)
+    {
+        cout << "impossible d'effectuer cette opération !" << endl;
+    }
+    else
+    {
+        cout << a << " multiplier par " << b << " avec l'algorithme de karatsuba donne : " << c << endl;
+    }
+    cout << endl;
 
     return 0;
 }
