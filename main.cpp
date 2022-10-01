@@ -1,31 +1,60 @@
 #include <iostream>
 #include "karatsuba/karatsuba.h"
 #include "strassen/strassen.h"
+#include <vector>
 
 using namespace std;
 using namespace kara;
+using namespace stra;
 
 int main()
 {
 
-    long a;
-    long b;
+    int choice;
 
-    cout << "Entrer un premier nombre : ";
-    cin >> a;
-    cout << "Entrer un second nombre : ";
-    cin >> b;
-    long c = karatsuba(a, b);
-    cout << endl;
-    if (c == -1)
+    cout << "_________________________________choose : 1. Karatsuba algorithm\t 2. Strassen algorithm_____________________________ \nMake your choice : ";
+    cin >> choice;
+
+    switch (choice)
     {
-        cout << "impossible d'effectuer cette opération !" << endl;
+        case 1:
+            long a, b, c;
+
+            cout << "Entrer un premier nombre : ";
+            cin >> a;
+            cout << "Entrer un second nombre : ";
+            cin >> b;
+            c = karatsuba(a, b);
+            cout << endl;
+            if (c == -1)
+            {
+                cout << "impossible d'effectuer cette opération !" << endl;
+            }
+            else
+            {
+                cout << a << " multiplier par " << b << " avec l'algorithme de karatsuba donne : " << c << endl;
+            }
+            break;
+        case 2:
+            int n;
+
+            cout << "enter the size of the matrix: ";
+            cin >> n;
+
+            vector<int> cols(n);
+            vector< vector<int> > A(n, cols), B(n, cols), C(n, cols);
+
+            createMatrix(A, n);
+            createMatrix(B, n);
+
+            strassen(A, B, C, n);
+
+            printMatrix(A, n, 'A');
+            printMatrix(B, n, 'B');
+            printMatrix(C, n, 'C');
+
+            break;
     }
-    else
-    {
-        cout << a << " multiplier par " << b << " avec l'algorithme de karatsuba donne : " << c << endl;
-    }
-    cout << endl;
 
     // vector< vector<int> > M = {
     //     {1,2,3,4},
