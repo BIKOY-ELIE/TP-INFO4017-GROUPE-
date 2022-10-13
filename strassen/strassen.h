@@ -11,15 +11,45 @@ namespace stra
 
     using namespace std;
 
+        void printMatrix(vector<vector<int>> M, int n, char name) {
+        cout << endl;
+        cout << endl;
+
+        cout << "________________________________________________Print out of Matrix : " << name << "___________________________________________________________" << endl;
+        cout << endl;
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (j == n - 1)
+                {
+                    cout << M[i][j] << endl;
+                }
+                else if (j == 0)
+                {
+                    cout << "\t\t\t\t\t\t\t" << M[i][j] << " ";
+                }
+                else
+                {
+                    cout << M[i][j] << " ";
+                }
+            }
+        }
+
+        cout << endl;
+        cout << endl;
+    }
+
     void divideMatrix(
-        vector<vector<int>> A,
+        vector<vector<int>> &A,
         vector<vector<int>> &a,
         vector<vector<int>> &b,
         vector<vector<int>> &c,
         vector<vector<int>> &d,
         int n)
     {
-        if (n >= 4)
+        if (2*n >= 2)
         {
             for (int i = 0; i < n; i++)
             {
@@ -79,13 +109,24 @@ namespace stra
         else
         {
             // division of A
-            divideMatrix(a, b, c, d, A, nHalf - 1);
+            divideMatrix(A, a, b, c, d, nHalf);
+            // printMatrix(A, n, 'A');
+            // printMatrix(a, nHalf, 'a');
+            // printMatrix(b, nHalf, 'b');
+            // printMatrix(c, nHalf, 'c');
+            // printMatrix(d, nHalf, 'd');
 
             // // division of B
-            divideMatrix(e, f, g, h, B, nHalf - 1);
+            divideMatrix(B, e, f, g, h, nHalf);
+            // printMatrix(B, n, 'B');
+            // printMatrix(e, nHalf, 'e');
+            // printMatrix(f, nHalf, 'f');
+            // printMatrix(g, nHalf, 'g');
+            // printMatrix(h, nHalf, 'h');
 
             // determine p1
             subtractOrSum(f, h, FminusH, '-', nHalf - 1);
+            printMatrix(FminusH, nHalf, 'F');
             strassen(a, FminusH, p1, nHalf);
 
             // //determine p2
@@ -152,37 +193,6 @@ namespace stra
                 M[i][j] = (rand() % 10) + 1;
             }
         }
-    }
-
-    void printMatrix(vector<vector<int>> M, int n, char name)
-    {
-        cout << endl;
-        cout << endl;
-
-        cout << "________________________________________________Print out of Matrix : " << name << "___________________________________________________________" << endl;
-        cout << endl;
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (j == n - 1)
-                {
-                    cout << M[i][j] << endl;
-                }
-                else if (j == 0)
-                {
-                    cout << "\t\t\t\t\t\t\t" << M[i][j] << " ";
-                }
-                else
-                {
-                    cout << M[i][j] << " ";
-                }
-            }
-        }
-
-        cout << endl;
-        cout << endl;
     }
 
 }
